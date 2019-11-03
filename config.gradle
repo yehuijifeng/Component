@@ -1,0 +1,31 @@
+ext {//extend
+    isModule = true //false：组件模式；true：集成模式
+    //android基本配置
+    android = [
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.0",
+            minSdkVersion    : 15,
+            targetSdkVersion : 29,
+            versionCode      : 1,
+            versionName      : "v1.0.0"
+    ]
+    //各个模块的appid
+    appId = [
+            app    : "com.lh.component",
+            module1: "com.lh.module1",
+            module2: "com.lh.module2"
+    ]
+    //编译选项，兼容java8
+    appCompileOptions = [
+            sourceCompatibility: JavaVersion.VERSION_1_8,
+            targetCompatibility: JavaVersion.VERSION_1_8
+    ]
+    //各种依赖项
+    appDependencies = [
+            junit        : "junit:junit:4.12",
+            appcompat    : "androidx.appcompat:appcompat:1.1.0",
+            runner       : "androidx.test.ext:junit:1.1.1",
+            espresso_core: "androidx.test.espresso:espresso-core:3.2.0",
+            design       : "com.android.support:design:29.0.0",
+    ]
+}

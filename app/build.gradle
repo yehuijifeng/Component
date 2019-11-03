@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+//赋值引用
+def config = rootProject.ext.android
+def appId = rootProject.ext.appId
+def appDependencies = rootProject.ext.appDependencies;
+def appCompileOptions=rootProject.ext.appCompileOptions;
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+    defaultConfig {
+        applicationId appId.app
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = appCompileOptions.sourceCompatibility
+        targetCompatibility = appCompileOptions.targetCompatibility
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation appDependencies.junit
+    implementation appDependencies.appcompat
+    implementation appDependencies.design
+    implementation appDependencies.runner
+    implementation appDependencies.espresso_core
+    implementation project(':router-annotation')
+    annotationProcessor project(':router-compiler')
+
+    if (rootProject.ext.isModule) {
+        implementation project(':module2')
+        implementation project(':module1')
+    }
+}

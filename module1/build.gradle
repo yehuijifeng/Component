@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+def config = rootProject.ext.android
+def appDependencies = rootProject.ext.appDependencies;
+def appCompileOptions=rootProject.ext.appCompileOptions;
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = appCompileOptions.sourceCompatibility
+        targetCompatibility = appCompileOptions.targetCompatibility
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation appDependencies.junit
+    implementation appDependencies.appcompat
+    implementation appDependencies.design
+    implementation appDependencies.runner
+    implementation appDependencies.espresso_core
+}
